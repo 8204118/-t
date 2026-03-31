@@ -3,232 +3,241 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>🥚 洛克王国蛋组图鉴</title>
-  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
-  <script src="https://cdn.tailwindcss.com"></script>
+  <title>洛克王国蛋组图鉴</title>
   <style>
-    *{box-sizing:border-box}
-    body{margin:0;font-family:'Nunito',system-ui,sans-serif;background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);min-height:100vh;color:#1e293b}
-    .container{max-width:1200px;margin:0 auto;padding:20px}
-    .header{text-align:center;padding:40px 20px;color:white}
-    .header h1{font-size:42px;font-weight:800;margin:0 0 10px;text-shadow:0 2px 10px rgba(0,0,0,0.2)}
-    .header p{font-size:18px;opacity:0.9;font-weight:600}
-    .main{background:white;border-radius:24px;padding:30px;margin-top:-20px;box-shadow:0 20px 60px rgba(0,0,0,0.3)}
-    .search-box{position:relative;margin-bottom:24px}
-    .search-box input{width:100%;padding:16px 24px 16px 52px;border:2px solid #e2e8f0;border-radius:16px;font-size:16px;font-family:inherit;transition:all 0.3s}
-    .search-box input:focus{outline:none;border-color:#667eea;box-shadow:0 0 0 4px rgba(102,126,234,0.1)}
-    .search-box .icon{position:absolute;left:18px;top:50%;transform:translateY(-50%);font-size:20px}
-    .tabs{display:flex;gap:8px;margin-bottom:24px;background:#f1f5f9;padding:6px;border-radius:16px}
-    .tab{flex:1;padding:12px 20px;border:none;border-radius:12px;font-family:inherit;font-weight:700;font-size:14px;cursor:pointer;transition:all 0.3s;background:transparent;color:#64748b}
-    .tab.active{background:white;color:#667eea;box-shadow:0 2px 8px rgba(0,0,0,0.1)}
-    .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px}
-    .card{background:#f8fafc;border-radius:20px;padding:20px;border:2px solid transparent;transition:all 0.3s;cursor:pointer}
-    .card:hover{transform:translateY(-4px);box-shadow:0 12px 24px rgba(0,0,0,0.15)}
-    .card-header{display:flex;align-items:center;gap:12px;margin-bottom:16px}
-    .card-icon{width:48px;height:48px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:24px;background:linear-gradient(135deg,var(--c) 0%,var(--cl) 100%);box-shadow:0 4px 12px var(--cs)}
-    .card-title{font-size:18px;font-weight:800}
-    .card-count{font-size:13px;color:#64748b;font-weight:600}
-    .tags{display:flex;flex-wrap:wrap;gap:8px}
-    .tag{display:inline-flex;align-items:center;padding:8px 14px;border-radius:999px;font-size:13px;font-weight:700;cursor:pointer;transition:all 0.2s;background:#e2e8f0;color:#475569}
-    .tag:hover{transform:scale(1.05)}
-    .tag.active{background:var(--c);color:white;box-shadow:0 4px 12px var(--cs)}
-    .selected-area{background:linear-gradient(135deg,#dbeafe 0%,#bfdbfe 100%);border-radius:20px;padding:24px;margin-bottom:24px;border:2px dashed #60a5fa}
-    .selected-title{font-size:18px;font-weight:800;margin-bottom:12px;color:#1e40af}
-    .selected-tags{display:flex;flex-wrap:wrap;gap:10px}
-    .selected-tag{display:inline-flex;align-items:center;gap:8px;padding:10px 16px;border-radius:999px;font-size:14px;font-weight:700;background:white;box-shadow:0 2px 8px rgba(0,0,0,0.1);animation:popIn 0.3s}
-    @keyframes popIn{from{opacity:0;transform:scale(0.8)}to{opacity:1;transform:scale(1)}}
-    .btn{display:inline-flex;align-items:center;gap:8px;padding:14px 28px;border-radius:14px;font-family:inherit;font-weight:800;font-size:15px;cursor:pointer;transition:all 0.3s;border:none}
-    .btn-primary{background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);color:white;box-shadow:0 4px 14px rgba(102,126,234,0.4)}
-    .btn-primary:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(102,126,234,0.5)}
-    .btn-secondary{background:white;color:#64748b;border:2px solid #e2e8f0}
-    .btn-secondary:hover{border-color:#cbd5e1;background:#f8fafc}
-    .results{background:#f8fafc;border-radius:20px;padding:24px}
-    .result-item{display:flex;align-items:center;gap:12px;padding:16px;background:white;border-radius:16px;margin-bottom:12px;box-shadow:0 2px 8px rgba(0,0,0,0.05)}
-    .toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(100px);background:#1e293b;color:white;padding:14px 28px;border-radius:12px;font-weight:600;opacity:0;transition:all 0.3s;z-index:9999}
-    .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
-    .hidden{display:none}
-    @media(max-width:768px){.grid{grid-template-columns:1fr}.header h1{font-size:32px}.main{padding:20px}}
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:#f5f5f5;padding:16px;line-height:1.5}
+    .header{margin-bottom:16px}
+    h1{font-size:20px;font-weight:700;color:#333}
+    .subtitle{font-size:13px;color:#666;margin-top:4px}
+    
+    /* Search */
+    .search{margin-bottom:12px}
+    .search input{width:100%;padding:10px 14px;border:1px solid #ddd;border-radius:8px;font-size:14px;outline:none}
+    .search input:focus{border-color:#4CAF50}
+    
+    /* Layout */
+    .layout{display:grid;grid-template-columns:1fr 320px;gap:16px}
+    @media(max-width:900px){.layout{grid-template-columns:1fr}}
+    
+    /* Left: All Groups */
+    .groups{display:flex;flex-direction:column;gap:12px}
+    .group{background:#fff;border-radius:10px;padding:12px;box-shadow:0 1px 3px rgba(0,0,0,0.1)}
+    .group-header{display:flex;align-items:center;gap:8px;margin-bottom:10px;padding-bottom:8px;border-bottom:1px solid #eee}
+    .group-icon{width:28px;height:28px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:16px}
+    .group-name{font-size:15px;font-weight:700;color:#333}
+    .group-count{font-size:12px;color:#999;margin-left:auto}
+    .pets{display:flex;flex-wrap:wrap;gap:6px}
+    .pet{display:inline-flex;align-items:center;padding:5px 10px;border-radius:15px;font-size:13px;font-weight:500;cursor:pointer;transition:all 0.15s;background:#f0f0f0;color:#555;border:1px solid transparent}
+    .pet:hover{transform:scale(1.05)}
+    .pet.active{color:#fff;box-shadow:0 2px 6px rgba(0,0,0,0.2)}
+    
+    /* Right: Selected & Results */
+    .sidebar{display:flex;flex-direction:column;gap:12px}
+    .panel{background:#fff;border-radius:10px;padding:12px;box-shadow:0 1px 3px rgba(0,0,0,0.1)}
+    .panel-title{font-size:14px;font-weight:700;color:#333;margin-bottom:10px;display:flex;align-items:center;gap:6px}
+    
+    /* Selected Pet */
+    .selected-pet{padding:12px;background:#f8f8f8;border-radius:8px;text-align:center}
+    .selected-pet .emoji{font-size:32px;margin-bottom:4px}
+    .selected-pet .name{font-size:16px;font-weight:700;color:#333}
+    .selected-pet .group{font-size:12px;color:#666;margin-top:2px}
+    .empty-text{color:#999;font-size:13px;text-align:center;padding:20px}
+    
+    /* Partners */
+    .partner-list{max-height:400px;overflow-y:auto}
+    .partner-item{display:flex;align-items:center;gap:10px;padding:8px;border-radius:6px;margin-bottom:4px;background:#f8f8f8}
+    .partner-item:hover{background:#f0f0f0}
+    .partner-emoji{font-size:20px}
+    .partner-info{flex:1}
+    .partner-name{font-size:13px;font-weight:600;color:#333}
+    .partner-group{font-size:11px;color:#888}
+    .match-badge{font-size:11px;padding:2px 8px;border-radius:10px;background:#4CAF50;color:#fff;font-weight:600}
+    
+    /* Filter */
+    .filter{margin-bottom:8px}
+    .filter label{display:flex;align-items:center;gap:6px;font-size:13px;color:#555;cursor:pointer}
+    .filter input{width:16px;height:16px;cursor:pointer}
+    
+    /* Scrollbar */
+    ::-webkit-scrollbar{width:6px;height:6px}
+    ::-webkit-scrollbar-track{background:#f0f0f0;border-radius:3px}
+    ::-webkit-scrollbar-thumb{background:#ccc;border-radius:3px}
+    ::-webkit-scrollbar-thumb:hover{background:#aaa}
   </style>
 </head>
 <body>
   <div class="header">
-    <div class="container">
-      <h1>🥚 洛克王国蛋组图鉴</h1>
-      <p>孵蛋配对查询工具 · 快速找到可配对的精灵组合</p>
-    </div>
+    <h1>🥚 洛克王国蛋组图鉴</h1>
+    <div class="subtitle">点击精灵查看可孵蛋配对</div>
   </div>
   
-  <div class="container">
-    <div class="main">
-      <!-- Search -->
-      <div class="search-box">
-        <span class="icon">🔍</span>
-        <input type="text" id="searchInput" placeholder="搜索精灵名称..." autocomplete="off">
+  <div class="search">
+    <input type="text" id="searchInput" placeholder="搜索精灵名称..." autocomplete="off">
+  </div>
+  
+  <div class="layout">
+    <!-- Left: All Groups -->
+    <div class="groups" id="groupsContainer"></div>
+    
+    <!-- Right: Selected & Partners -->
+    <div class="sidebar">
+      <!-- Selected -->
+      <div class="panel">
+        <div class="panel-title">🎯 已选精灵</div>
+        <div id="selectedContainer">
+          <div class="empty-text">点击左侧精灵查看配对</div>
+        </div>
       </div>
       
-      <!-- Tabs -->
-      <div class="tabs">
-        <button class="tab active" onclick="switchTab('all')">📋 全部蛋组</button>
-        <button class="tab" onclick="switchTab('pair')">💕 配对查询</button>
-      </div>
-      
-      <!-- All Groups Tab -->
-      <div id="allTab">
-        <div style="display:flex;align-items:center;gap:12px;margin-bottom:20px;padding:12px 16px;background:#f8fafc;border-radius:12px">
-          <label style="display:flex;align-items:center;gap:8px;cursor:pointer;font-weight:600;color:#475569">
-            <input type="checkbox" id="hideUnknown" onchange="toggleUnknown()" style="width:18px;height:18px;cursor:pointer;accent-color:#667eea">
-            <span>🙈 隐藏不可孵蛋（未知组）</span>
-          </label>
+      <!-- Partners -->
+      <div class="panel">
+        <div class="panel-title">💕 可配对精灵</div>
+        <div class="partner-list" id="partnersContainer">
+          <div class="empty-text">选择精灵后显示可配对</div>
         </div>
-        <div id="eggGrid" class="grid"></div>
-      </div>
-      
-      <!-- Pairing Tab -->
-      <div id="pairTab" class="hidden">
-        <div class="selected-area">
-          <div class="selected-title">🎯 已选精灵（点击上方精灵添加）</div>
-          <div id="selectedTags" class="selected-tags">
-            <span style="color:#64748b;font-size:14px">暂无选择</span>
-          </div>
-        </div>
-        <div style="display:flex;gap:12px;margin-bottom:24px">
-          <button class="btn btn-primary" onclick="findPairs()">💕 查找可配对</button>
-          <button class="btn btn-secondary" onclick="clearAll()">🗑️ 清空</button>
-        </div>
-        <div id="results" class="results hidden"></div>
       </div>
     </div>
   </div>
-  
-  <div id="toast" class="toast"></div>
-  
-  <script src="egg-groups-data.js?v=2"></script>
+
+  <script src="egg-groups-data.js"></script>
   <script>
-    let selected = [];
+    let selectedPet = null;
+    let hideUnknown = true;
     
-    function showToast(msg) {
-      const t = document.getElementById('toast');
-      t.textContent = msg;
-      t.classList.add('show');
-      setTimeout(() => t.classList.remove('show'), 2500);
-    }
+    // Color mapping for groups
+    const groupColors = {
+      '精灵组': '#a855f7', '怪兽组': '#ef4444', '植物组': '#22c55e', '动物组': '#f97316',
+      '拟人组': '#ec4899', '昆虫组': '#84cc16', '飞行组': '#06b6d4', '两栖组': '#14b8a6',
+      '海洋组': '#3b82f6', '机械组': '#78716c', '矿石组': '#a78bfa', '妖精组': '#f472b6',
+      '巨龙组': '#7c3aed', '乖乖组': '#fbbf24', '未知组': '#6b7280'
+    };
     
-    function switchTab(tab) {
-      document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-      event.target.classList.add('active');
-      document.getElementById('allTab').classList.toggle('hidden', tab !== 'all');
-      document.getElementById('pairTab').classList.toggle('hidden', tab !== 'pair');
-    }
-    
-    let hideUnknown = false;
-    
-    function toggleUnknown() {
-      hideUnknown = document.getElementById('hideUnknown').checked;
-      render();
-      showToast(hideUnknown ? '已隐藏未知组' : '已显示全部');
+    function getGroupColor(group) {
+      return groupColors[group] || '#6b7280';
     }
     
     function render() {
-      const grid = document.getElementById('eggGrid');
-      const groups = Object.entries(EGG_GROUPS).filter(([name, data]) => {
-        if (!hideUnknown) return true;
-        return name !== '未知组';
-      });
-      grid.innerHTML = groups.map(([name, data]) => {
-        const tags = data.pets.map(pet => {
-          const isSel = selected.find(s => s.name === pet);
-          return `<span class="tag ${isSel ? 'active' : ''}" style="${isSel ? `--c:${data.color};--cs:${data.color}40` : ''}" onclick="togglePet('${pet}','${name}')">${pet}</span>`;
+      const container = document.getElementById('groupsContainer');
+      const groups = Object.entries(EGG_GROUPS);
+      
+      container.innerHTML = groups.map(([groupName, data]) => {
+        const color = data.color || getGroupColor(groupName);
+        const petsHtml = data.pets.map(pet => {
+          const isSelected = selectedPet && selectedPet.name === pet;
+          return `<span class="pet ${isSelected ? 'active' : ''}" data-pet="${pet}" data-group="${groupName}" style="${isSelected ? `background:${color};border-color:${color}` : ''}">${pet}</span>`;
         }).join('');
+        
         return `
-          <div class="card" style="--c:${data.color};--cl:${data.color}40;--cs:${data.color}30">
-            <div class="card-header">
-              <div class="card-icon">${data.emoji}</div>
-              <div>
-                <div class="card-title">${name}</div>
-                <div class="card-count">${data.pets.length} 只精灵</div>
-              </div>
+          <div class="group" data-group="${groupName}">
+            <div class="group-header">
+              <div class="group-icon" style="background:${color}20;color:${color}">${data.emoji}</div>
+              <div class="group-name">${groupName}</div>
+              <div class="group-count">${data.pets.length}只</div>
             </div>
-            <div class="tags">${tags}</div>
+            <div class="pets">${petsHtml}</div>
           </div>
         `;
       }).join('');
-      updateSelected();
+      
+      // Add click handlers
+      document.querySelectorAll('.pet').forEach(pet => {
+        pet.addEventListener('click', () => {
+          const name = pet.dataset.pet;
+          const group = pet.dataset.group;
+          selectPet(name, group);
+        });
+      });
     }
     
-    function togglePet(name, group) {
-      const idx = selected.findIndex(s => s.name === name);
-      if (idx >= 0) {
-        selected.splice(idx, 1);
-        showToast(`已移除 ${name}`);
-      } else if (selected.length < 6) {
-        selected.push({ name, group });
-        showToast(`已添加 ${name}`);
-      } else {
-        showToast('最多选择 6 个精灵');
-      }
+    function selectPet(name, group) {
+      selectedPet = { name, group };
       render();
+      renderSelected();
+      renderPartners();
     }
     
-    function updateSelected() {
-      const box = document.getElementById('selectedTags');
-      if (selected.length === 0) {
-        box.innerHTML = '<span style="color:#64748b;font-size:14px">暂无选择</span>';
-        return;
-      }
-      box.innerHTML = selected.map(s => {
-        const color = EGG_GROUPS[s.group].color;
-        return `<span class="selected-tag" style="border:2px solid ${color}">${EGG_GROUPS[s.group].emoji} ${s.name} <span style="cursor:pointer;margin-left:4px" onclick="togglePet('${s.name}','${s.group}')">×</span></span>`;
-      }).join('');
+    function getPetGroups(petName) {
+      const groups = [];
+      Object.entries(EGG_GROUPS).forEach(([groupName, data]) => {
+        if (data.pets.includes(petName)) {
+          groups.push({ name: groupName, emoji: data.emoji, color: data.color });
+        }
+      });
+      return groups;
     }
     
-    function clearAll() {
-      selected = [];
-      render();
-      document.getElementById('results').classList.add('hidden');
-      showToast('已清空选择');
-    }
-    
-    function findPairs() {
-      const results = document.getElementById('results');
-      if (selected.length === 0) {
-        showToast('请先选择精灵');
+    function renderSelected() {
+      const container = document.getElementById('selectedContainer');
+      if (!selectedPet) {
+        container.innerHTML = '<div class="empty-text">点击左侧精灵查看配对</div>';
         return;
       }
       
-      const pairs = [];
-      selected.forEach(p1 => {
-        selected.forEach(p2 => {
-          if (p1.name !== p2.name && p1.group === p2.group) {
-            const key = [p1.name, p2.name].sort().join('-');
-            if (!pairs.find(p => p.key === key)) {
-              pairs.push({ key, p1: p1.name, p2: p2.name, group: p1.group, ...EGG_GROUPS[p1.group] });
-            }
+      const petGroups = getPetGroups(selectedPet.name);
+      const primaryGroup = petGroups[0];
+      
+      const groupsHtml = petGroups.map(g => 
+        `<span style="display:inline-flex;align-items:center;gap:4px;padding:3px 10px;border-radius:12px;font-size:12px;font-weight:600;background:${g.color}20;color:${g.color}">${g.emoji} ${g.name}</span>`
+      ).join('');
+      
+      container.innerHTML = `
+        <div class="selected-pet">
+          <div class="emoji">${primaryGroup.emoji}</div>
+          <div class="name">${selectedPet.name}</div>
+          <div style="margin-top:10px;display:flex;flex-wrap:wrap;gap:6px;justify-content:center">${groupsHtml}</div>
+        </div>
+      `;
+    }
+    
+    function renderPartners() {
+      const container = document.getElementById('partnersContainer');
+      if (!selectedPet) {
+        container.innerHTML = '<div class="empty-text">选择精灵后显示可配对</div>';
+        return;
+      }
+      
+      // Get all groups that the selected pet belongs to
+      const petGroups = getPetGroups(selectedPet.name);
+      const partners = new Map();
+      
+      // Find all pets that share at least one group with the selected pet
+      petGroups.forEach(pg => {
+        const groupData = EGG_GROUPS[pg.name];
+        groupData.pets.forEach(pet => {
+          if (pet === selectedPet.name) return;
+          if (!partners.has(pet)) {
+            partners.set(pet, {
+              name: pet,
+              group: pg
+            });
           }
         });
       });
       
-      results.classList.remove('hidden');
-      if (pairs.length === 0) {
-        results.innerHTML = '<div style="text-align:center;padding:40px;color:#94a3b8"><div style="font-size:48px;margin-bottom:12px">🔍</div><div>未找到可配对的组合</div></div>';
-      } else {
-        results.innerHTML = '<h3 style="font-size:18px;font-weight:800;margin-bottom:16px">💕 配对结果</h3>' + pairs.map(p => `
-          <div class="result-item">
-            <div style="font-size:28px;width:48px;height:48px;display:flex;align-items:center;justify-content:center;background:white;border-radius:14px;box-shadow:0 2px 8px rgba(0,0,0,0.1)">${p.emoji}</div>
-            <div style="flex:1">
-              <div style="font-weight:800;font-size:16px">${p.p1} + ${p.p2}</div>
-              <div style="font-size:13px;color:#64748b;font-weight:600">${p.group} · 可孵蛋配对</div>
-            </div>
-          </div>
-        `).join('');
+      if (partners.size === 0) {
+        container.innerHTML = '<div class="empty-text">暂无可配对精灵</div>';
+        return;
       }
+      
+      const partnersList = Array.from(partners.values());
+      
+      container.innerHTML = partnersList.map(p => `
+        <div class="partner-item" onclick="selectPet('${p.name}', '${p.group.name}')" style="cursor:pointer">
+          <div class="partner-emoji">${p.group.emoji}</div>
+          <div class="partner-info">
+            <div class="partner-name">${p.name}</div>
+          </div>
+        </div>
+      `).join('');
     }
     
     // Search
     document.getElementById('searchInput').addEventListener('input', function() {
       const term = this.value.toLowerCase();
-      document.querySelectorAll('.card').forEach(card => {
-        const text = card.textContent.toLowerCase();
-        card.style.display = text.includes(term) ? '' : 'none';
+      document.querySelectorAll('.group').forEach(group => {
+        const text = group.textContent.toLowerCase();
+        group.style.display = text.includes(term) ? '' : 'none';
       });
     });
     
